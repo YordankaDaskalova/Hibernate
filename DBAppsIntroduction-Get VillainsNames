@@ -1,0 +1,27 @@
+
+import java.sql.*;
+import java.util.Properties;
+
+public class Main {
+    public static void main(String[] args) throws SQLException {
+
+       Properties properties = new Properties();
+       properties.setProperty("user", "root");
+       properties.setProperty("password", "1234");
+
+Connection connection  = DriverManager.getConnection("jdbc:mysql://localhost:3306/minions_db", properties);
+
+       String query = "SELECT v.name, COUNT(mv.minion_id) AS c FROM villains AS v JOIN minions_villains mv on v.id = mv.villain_id GROUP BY v.name HAVING  c > ? ORDER BY c DESC;";
+        PreparedStatement preparedStatement = connection.prepareStatement(query);
+
+        preparedStatement.setInt(1, 15);
+
+        ResultSet result = preparedStatement.executeQuery();
+        while (result.next()){
+            System.out.printf("%s %d",
+                    result.getString("name"),
+                    result.getInt("c")).println();
+
+        }
+    }
+}
