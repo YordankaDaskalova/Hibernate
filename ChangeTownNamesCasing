@@ -1,0 +1,41 @@
+import java.sql.*;
+import java.util.Properties;
+import java.util.Scanner;
+
+public class Demo {
+    public static void main(String[] args) throws SQLException {
+
+        Scanner scan = new Scanner(System.in);
+
+        Properties properties = new Properties();
+        properties.setProperty("user", "root");
+        properties.setProperty("password", "1234");
+        String country = scan.nextLine();
+        int count = 0;
+        boolean stop = true;
+
+        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/minions_db", properties);
+
+        String query = "SELECT * FROM towns where country = ? ORDER BY name;";
+        PreparedStatement preparedStatement = connection.prepareStatement(query);
+        preparedStatement.setString(1, country);
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+ 
+
+        StringBuilder sb = new StringBuilder();
+
+        while (resultSet.next()) {
+            sb.append(resultSet.getString("name"));
+            count++;
+            sb.append(", ");
+        }
+
+        System.out.printf("%d town names were affected.%n", count);
+        System.out.printf("[%s]", sb.toString().substring(0, sb.length() - 2));
+
+        System.out.println("No town names were affected.");
+    }
+}
+// трябва да доизмисля ако го няма да изпечата последното
+// Bulgaria
