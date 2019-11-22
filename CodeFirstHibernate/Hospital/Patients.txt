@@ -1,0 +1,106 @@
+package entity;
+
+import javax.persistence.*;
+import java.sql.Blob;
+import java.time.LocalDate;
+import java.util.Set;
+
+@Entity
+@Table(name = "Patient")
+public class Patients extends BaseEntity{
+    private String firstName;
+    private String lastName;
+    private String address;
+    private String email;
+    private LocalDate dateBirth;
+    private Blob picture;
+    private boolean medicalInsurance;
+    private Set<Diagnoses> diagnosesSet;
+    private Set<Visitations> visitationsSet;
+    private Set<PrescribedMedicaments> prescribedMedicamentsSet;
+
+    public Patients() {
+    }
+
+    @Column(name = "First_Name")
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    @Column(name = "Last_Name")
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    @Column(name = "address")
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    @Column(name = "email")
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    @Column(name = "birthday")
+    public LocalDate getDateBirth() {
+        return dateBirth;
+    }
+
+    public void setDateBirth(LocalDate dateBirth) {
+        this.dateBirth = dateBirth;
+    }
+
+    public void setPicture(Blob picture) {
+        this.picture = picture;
+    }
+@Column(name = "medical_Insurance")
+    public boolean isMedicalInsurance() {
+        return medicalInsurance;
+    }
+
+    public void setMedicalInsurance(boolean medicalInsurance) {
+        this.medicalInsurance = medicalInsurance;
+    }
+
+    @OneToMany(mappedBy = "patients")
+    public Set<Diagnoses> getDiagnosesSet() {
+        return diagnosesSet;
+    }
+
+    public void setDiagnosesSet(Set<Diagnoses> diagnosesSet) {
+        this.diagnosesSet = diagnosesSet;
+    }
+    @OneToMany(mappedBy = "patients")
+    public Set<Visitations> getVisitationsSet() {
+        return visitationsSet;
+    }
+
+    public void setVisitationsSet(Set<Visitations> visitationsSet) {
+        this.visitationsSet = visitationsSet;
+    }
+    @ManyToMany(mappedBy = "patients")
+    public Set<PrescribedMedicaments> getPrescribedMedicamentsSet() {
+        return prescribedMedicamentsSet;
+    }
+
+    public void setPrescribedMedicamentsSet(Set<PrescribedMedicaments> prescribedMedicamentsSet) {
+        this.prescribedMedicamentsSet = prescribedMedicamentsSet;
+    }
+}

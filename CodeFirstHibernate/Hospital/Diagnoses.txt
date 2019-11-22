@@ -1,0 +1,42 @@
+package entity;
+
+import javax.persistence.*;
+
+@Entity
+@Table(name = "diagnoses")
+public class Diagnoses extends BaseEntity {
+    private String name;
+    private String comments;
+    private Patients patients;
+
+    public Diagnoses() {
+    }
+
+    @Column(name = "name_Diagnoses")
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Column(name = "comments")
+    public String getComments() {
+        return comments;
+    }
+
+    public void setComments(String comments) {
+        this.comments = comments;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "patient_id", referencedColumnName = "id")
+    public Patients getPatients() {
+        return patients;
+    }
+
+    public void setPatients(Patients patients) {
+        this.patients = patients;
+    }
+}
