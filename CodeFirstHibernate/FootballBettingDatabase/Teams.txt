@@ -1,0 +1,96 @@
+package entity;
+
+import javax.persistence.*;
+import java.util.Set;
+
+@Entity
+@Table(name = "teams")
+public class Teams extends BaseEntity {
+    private String name;
+    private byte[] logo;
+    private String letterInitials;
+    private Colors primaryKitColor;
+    private Colors secondaryKitColor;
+    private Towns town;
+    private Double budget;
+    private Set<Players> players;
+
+    public Teams() {
+    }
+
+    @Column(name = "name")
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Lob
+    public byte[] getLogo() {
+        return logo;
+    }
+
+    public void setLogo(byte[] logo) {
+        this.logo = logo;
+    }
+
+    @Column(name = "letter_Initials")
+    public String getLetterInitials() {
+        return letterInitials;
+    }
+
+    public void setLetterInitials(String letterInitials) {
+        this.letterInitials = letterInitials;
+    }
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "primary_color_id", referencedColumnName = "id",
+            foreignKey = @ForeignKey(name = "FK_team_primary_color"))
+    public Colors getPrimaryKitColor() {
+        return primaryKitColor;
+    }
+
+    public void setPrimaryKitColor(Colors primaryKitColor) {
+        this.primaryKitColor = primaryKitColor;
+    }
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "secondary_color_id", referencedColumnName = "id",
+            foreignKey = @ForeignKey(name = "FK_team_secondary_color"))
+    public Colors getSecondaryKitColor() {
+        return secondaryKitColor;
+    }
+
+    public void setSecondaryKitColor(Colors secondaryKitColor) {
+        this.secondaryKitColor = secondaryKitColor;
+    }
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "towns_id", referencedColumnName = "id",
+            foreignKey = @ForeignKey(name = "FK_team_town"))
+    public Towns getTown() {
+        return town;
+    }
+
+    public void setTown(Towns town) {
+        this.town = town;
+    }
+
+    @Column(name = "budget")
+    public Double getBudget() {
+        return budget;
+    }
+
+    public void setBudget(Double budget) {
+        this.budget = budget;
+    }
+
+   @OneToMany(mappedBy = "team", cascade = CascadeType.ALL)
+    public Set<Players> getPlayers() {
+        return players;
+    }
+
+    public void setPlayers(Set<Players> players) {
+        this.players = players;
+    }
+}

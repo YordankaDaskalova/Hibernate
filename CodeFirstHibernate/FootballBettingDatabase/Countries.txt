@@ -1,0 +1,55 @@
+package entity;
+
+import javax.persistence.*;
+import java.util.Set;
+
+@Entity
+@Table(name = "countries")
+public class Countries {
+    private String id;
+    private String name;
+    private Continents continent;
+    private Set<Towns> towns;
+
+    public Countries() {
+    }
+
+    @Id
+    @Column(length = 3)
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    @Basic
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "continent_id", referencedColumnName = "id",
+            foreignKey = @ForeignKey(name = "FK_coutry_continent"))
+    public Continents getContinent() {
+        return continent;
+    }
+
+    public void setContinent(Continents continent) {
+        this.continent = continent;
+    }
+
+    @OneToMany(mappedBy = "country", cascade = CascadeType.ALL)
+    public Set<Towns> getTowns() {
+        return towns;
+    }
+
+    public void setTowns(Set<Towns> towns) {
+        this.towns = towns;
+    }
+}

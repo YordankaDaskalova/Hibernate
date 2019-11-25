@@ -1,0 +1,40 @@
+package entity;
+
+import javax.persistence.*;
+import java.time.LocalDateTime;
+@Entity
+@Table(name = "bets")
+public class Bets extends BaseEntity {
+    private Double betMoney;
+    private LocalDateTime dateTime;
+    private Users users;
+
+    public Bets() {
+    }
+@Column(name = "bet_money")
+    public Double getBetMoney() {
+        return betMoney;
+    }
+
+    public void setBetMoney(Double betMoney) {
+        this.betMoney = betMoney;
+    }
+@Column(name = "date_time")
+    public LocalDateTime getDateTime() {
+        return dateTime;
+    }
+
+    public void setDateTime(LocalDateTime dateTime) {
+        this.dateTime = dateTime;
+    }
+@ManyToOne(cascade =  CascadeType.ALL)
+@JoinColumn(name = "user_id", referencedColumnName = "id",
+foreignKey = @ForeignKey(name = "FK_bet_user"))
+    public Users getUsers() {
+        return users;
+    }
+
+    public void setUsers(Users users) {
+        this.users = users;
+    }
+}

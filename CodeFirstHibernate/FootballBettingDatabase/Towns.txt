@@ -1,0 +1,43 @@
+package entity;
+
+import javax.persistence.*;
+import java.util.Set;
+
+@Entity
+@Table(name = "towns")
+public class Towns extends BaseEntity {
+    private String name;
+    private Countries country;
+    private Set<Teams> teams;
+
+    public Towns() {
+    }
+
+    @Basic
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "country_id", referencedColumnName = "id",
+            foreignKey = @ForeignKey(name = "FK_town_country"))
+    public Countries getCountry() {
+        return country;
+    }
+
+    public void setCountry(Countries country) {
+        this.country = country;
+    }
+@OneToMany(mappedBy = "town", cascade = CascadeType.ALL)
+    public Set<Teams> getTeams() {
+        return teams;
+    }
+
+    public void setTeams(Set<Teams> teams) {
+        this.teams = teams;
+    }
+}

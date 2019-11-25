@@ -1,0 +1,69 @@
+package entity;
+
+import javax.persistence.*;
+
+@Entity
+@Table(name = "players")
+public class Players extends BaseEntity {
+    private String name;
+    private Integer squadNumber;
+    private Teams team;
+    private Position position;
+    private boolean isCurrentlyInjured;
+
+    public Players() {
+    }
+
+    @Basic
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Column(name = "squad_number")
+    public int getSquadNumber() {
+        return squadNumber;
+    }
+
+    public void setSquadNumber(int squadNumber) {
+        this.squadNumber = squadNumber;
+    }
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "teams_id", referencedColumnName = "id",
+            foreignKey = @ForeignKey(name = "FK_players_teams"))
+    public Teams getTeam() {
+        return team;
+    }
+
+    public void setTeam(Teams team) {
+        this.team = team;
+    }
+
+    public void setSquadNumber(Integer squadNumber) {
+        this.squadNumber = squadNumber;
+    }
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "position_id", referencedColumnName = "id",
+            foreignKey = @ForeignKey(name = "FK_player_position"))
+    public Position getPosition() {
+        return position;
+    }
+
+    public void setPosition(Position position) {
+        this.position = position;
+    }
+
+    @Column(name = "is_currently_injured")
+    public boolean isCurrentlyInjured() {
+        return isCurrentlyInjured;
+    }
+
+    public void setCurrentlyInjured(boolean currentlyInjured) {
+        isCurrentlyInjured = currentlyInjured;
+    }
+}

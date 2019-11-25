@@ -1,0 +1,24 @@
+package entity;
+
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "competition_types")
+public class CompetitionTypes extends BaseEntity {
+    private String name;
+
+    public CompetitionTypes() {
+    }
+
+    @Basic
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+}

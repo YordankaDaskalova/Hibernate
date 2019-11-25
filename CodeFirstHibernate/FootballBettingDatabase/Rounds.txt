@@ -1,0 +1,23 @@
+package entity;
+
+import javax.persistence.Basic;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "rounds")
+public class Rounds extends BaseEntity {
+    private String name;
+
+    public Rounds() {
+    }
+
+    @Basic
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+}

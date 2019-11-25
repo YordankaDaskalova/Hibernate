@@ -1,0 +1,63 @@
+package entity;
+
+import javax.persistence.*;
+
+@Entity
+@Table(name = "player_statistics")
+public class PlayerStatistics extends BaseEntity {
+    private Games games;
+    private Players players;
+    private Integer ScoredGoals;
+    private Integer PlayerAssists;
+    private Integer PlayedMinutesDuringGame;
+
+    public PlayerStatistics() {
+    }
+@ManyToOne(cascade = CascadeType.ALL)
+@JoinColumn(name = "game_id", referencedColumnName = "id",
+foreignKey = @ForeignKey(name = "FK_ps_game"))
+    public Games getGames() {
+        return games;
+    }
+
+    public void setGames(Games games) {
+        this.games = games;
+    }
+@ManyToOne(cascade = CascadeType.ALL)
+@JoinColumn(name = "player_id", referencedColumnName = "id",
+foreignKey = @ForeignKey(name = "FK_ps_player"))
+    public Players getPlayers() {
+        return players;
+    }
+
+    public void setPlayers(Players players) {
+        this.players = players;
+    }
+
+    @Column(name = "scored_goals")
+    public Integer getScoredGoals() {
+        return ScoredGoals;
+    }
+
+    public void setScoredGoals(Integer scoredGoals) {
+        ScoredGoals = scoredGoals;
+    }
+
+    @Column(name = "player_assists")
+    public Integer getPlayerAssists() {
+        return PlayerAssists;
+    }
+
+    public void setPlayerAssists(Integer playerAssists) {
+        PlayerAssists = playerAssists;
+    }
+
+    @Column(name = "played_minutes")
+    public Integer getPlayedMinutesDuringGame() {
+        return PlayedMinutesDuringGame;
+    }
+
+    public void setPlayedMinutesDuringGame(Integer playedMinutesDuringGame) {
+        PlayedMinutesDuringGame = playedMinutesDuringGame;
+    }
+}

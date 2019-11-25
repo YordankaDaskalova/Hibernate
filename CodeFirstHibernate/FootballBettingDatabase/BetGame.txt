@@ -1,0 +1,47 @@
+package entity;
+
+import javax.persistence.*;
+
+@Entity
+@Table(name = "bet_games")
+public class BetGame extends BaseEntity {
+    private Games games;
+    private Bets bets;
+    private ResultPrediction resultPrediction;
+
+    public BetGame() {
+    }
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "games_id", referencedColumnName = "id",
+            foreignKey = @ForeignKey(name = "FK_betgame_game"))
+    public Games getGames() {
+        return games;
+    }
+
+    public void setGames(Games games) {
+        this.games = games;
+    }
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "bets_id", referencedColumnName = "id",
+            foreignKey = @ForeignKey(name = "FK_betgame_bet"))
+    public Bets getBets() {
+        return bets;
+    }
+
+    public void setBets(Bets bets) {
+        this.bets = bets;
+    }
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "result_prediction", referencedColumnName = "id",
+            foreignKey = @ForeignKey(name = "FK_betgame_resultp"))
+    public ResultPrediction getResultPrediction() {
+        return resultPrediction;
+    }
+
+    public void setResultPrediction(ResultPrediction resultPrediction) {
+        this.resultPrediction = resultPrediction;
+    }
+}
