@@ -1,0 +1,35 @@
+package BillsPayment;
+
+import entity.BaseEntity;
+import entity.Users;
+
+import javax.persistence.*;
+
+@Entity
+@Table(name = "biilling_detail")
+public class BillingDetail extends BaseEntity {
+    private String number;
+    private Users owner;
+
+    public BillingDetail() {
+    }
+
+    @Column(name = "number")
+    public String getNumber() {
+        return number;
+    }
+
+    public void setNumber(String number) {
+        this.number = number;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "owner_id", referencedColumnName = "id")
+    public Users getOwner() {
+        return owner;
+    }
+
+    public void setOwner(Users owner) {
+        this.owner = owner;
+    }
+}

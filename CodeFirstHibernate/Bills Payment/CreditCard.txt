@@ -1,0 +1,57 @@
+package BillsPayment;
+
+import entity.BaseEntity;
+import entity.Users;
+
+import javax.persistence.*;
+import java.time.Month;
+import java.time.Year;
+
+@Entity
+@Table(name = "credit_card")
+public class CreditCard extends BaseEntity {
+    private String cardType;
+    private Month expirationMonth;
+    private Year expirationYear;
+    private Users users;
+
+    public CreditCard() {
+    }
+
+    @Column(name = "card_type")
+    public String getCardType() {
+        return cardType;
+    }
+
+    public void setCardType(String cardType) {
+        this.cardType = cardType;
+    }
+
+    @Column(name = "month")
+    public Month getExpirationMonth() {
+        return expirationMonth;
+    }
+
+    public void setExpirationMonth(Month expirationMonth) {
+        this.expirationMonth = expirationMonth;
+    }
+
+    @Column(name = "year")
+    public Year getExpirationYear() {
+        return expirationYear;
+    }
+
+    public void setExpirationYear(Year expirationYear) {
+        this.expirationYear = expirationYear;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    public Users getUsers() {
+        return users;
+    }
+
+    public void setUsers(Users users) {
+        this.users = users;
+    }
+}
