@@ -1,0 +1,5 @@
+package softuni.springinto.entites;
+
+public enum  EditionType {
+    NORMAL, PROMO, GOLD;
+}

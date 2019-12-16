@@ -1,0 +1,23 @@
+package softuni.springinto.entites;
+
+import javax.persistence.*;
+
+@MappedSuperclass
+public abstract class BaseEntity {
+    private Integer Id;
+
+    public BaseEntity() {
+    }
+
+    @Id
+    @Column(name = "id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer id;
+    public Integer getId() {
+        return Id;
+    }
+
+    public void setId(Integer id) {
+        Id = id;
+    }
+}
