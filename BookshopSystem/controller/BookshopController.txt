@@ -1,0 +1,82 @@
+package bookshopsystemapp.controller;
+
+import bookshopsystemapp.service.AuthorService;
+import bookshopsystemapp.service.BookService;
+import bookshopsystemapp.service.CategoryService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.stereotype.Controller;
+
+import java.util.List;
+import java.util.Set;
+
+@Controller
+public class BookshopController implements CommandLineRunner {
+
+    private final AuthorService authorService;
+    private final CategoryService categoryService;
+    private final BookService bookService;
+
+    @Autowired
+    public BookshopController(AuthorService authorService, CategoryService categoryService, BookService bookService) {
+        this.authorService = authorService;
+        this.categoryService = categoryService;
+        this.bookService = bookService;
+    }
+
+    @Override
+    public void run(String... strings) throws Exception {
+//        this.authorService.seedAuthors();
+//        this.categoryService.seedCategories();
+//        this.bookService.seedBooks();
+//        this.printBookTitle();
+//        this.lessThan500();
+//        this.printBookTitlePriceBetween();
+//        this.titleNotReleased();
+//        this.printTitleEditionTypePrice();
+//        printFirstNameContainsCharSymbol();
+//        printTitleContainsSymbol();
+//        printBooksByAuthor();
+//        printNumberTitle();
+        printTitleEditionTypeAgeRestrictionPrice();
+
+
+    }
+    private void printBookTitle(){
+        List<String> titles = this.bookService.getAllBookTitlesWithAgeRest();
+        titles.forEach(System.out::println);
+    }
+    private void lessThan500(){
+        List<String> copies = this.bookService.getAllBookTitlesWhichLessCopies();
+        copies.forEach(System.out::println);
+    }
+    private void printBookTitlePriceBetween(){
+        List<String> titlePrice = this.bookService.getAllBookTitleAndPriceBetween();
+        titlePrice.forEach(System.out::println);
+    }
+    private void titleNotReleased(){
+        List<String> titleDate = this.bookService.getTitleIsNotDate();
+        titleDate.forEach(System.out::println);
+    }
+    private void printTitleEditionTypePrice(){
+        List<String> titleEditionTypePrice = this.bookService.getTitleEditionTypeAndPrice();
+               titleEditionTypePrice.forEach(System.out::println);
+    }
+    private void printFirstNameContainsCharSymbol(){
+        List<String> name = this.authorService.getFirstName();
+        name.forEach(System.out::println);
+    }
+    private void printTitleContainsSymbol(){
+        List<String> nameTitle = this.bookService.getTitlesOfBooksContainString();
+        nameTitle.forEach(System.out::println);
+    }
+    private void printBooksByAuthor(){
+        System.out.println(this.bookService.getAllBooksByAuthor());
+    }
+    private void printNumberTitle(){
+        System.out.println(this.bookService.getNumberCountTitle());
+    }
+    private void printTitleEditionTypeAgeRestrictionPrice(){
+        this.bookService.getTitleEditionTypeAgeRestrictionPrice();
+    }
+}
